@@ -79,3 +79,8 @@ dev
 
 This dir contains config files for the development deployments of
 the above services.
+
+test
+====
+
+vcsrepotest
