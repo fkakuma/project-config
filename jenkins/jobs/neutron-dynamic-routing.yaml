@@ -72,6 +72,97 @@
           export PROJECTS="openstack/neutron-dynamic-routing $PROJECTS"
           export DEVSTACK_LOCAL_CONFIG="enable_plugin neutron-dynamic-routing git://git.openstack.org/openstack/neutron-dynamic-routing"
 
+          function gate_hook {{
+              bash -xe $BASE/new/neutron-dynamic-routing/neutron_dynamic_routing/tests/contrib/gate_hook.sh dsvm-api
+          }}
+          export -f gate_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - test-results
+      - devstack-logs
+      - console-log
+
+- job-template:
+    name: '{pipeline}-neutron-dynamic-routing-dsvm-scenario-ipv4{job-suffix}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 130
+      - timestamps
+
+    builders:
+      - print-template-name:
+          template-name: "{template-name}"
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_REGEX="^neutron_dynamic_routing.tests.tempest.scenario.ipv4\."
+          export DEVSTACK_GATE_TEMPEST_ALL_PLUGINS=1
+          export DEVSTACK_GATE_NEUTRON=1
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          export PROJECTS="openstack/neutron-dynamic-routing $PROJECTS"
+          DEVSTACK_LOCAL_CONFIG="NEUTRON_CREATE_INITIAL_NETWORKS=False"
+          DEVSTACK_LOCAL_CONFIG+=$'\n'"enable_plugin neutron-dynamic-routing git://git.openstack.org/openstack/neutron-dynamic-routing"
+          export DEVSTACK_LOCAL_CONFIG
+
+          function gate_hook {{
+              bash -xe $BASE/new/neutron-dynamic-routing/neutron_dynamic_routing/tests/contrib/gate_hook.sh dsvm-scenario
+          }}
+          export -f gate_hook
+
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - test-results
+      - devstack-logs
+      - console-log
+
+- job-template:
+    name: '{pipeline}-neutron-dynamic-routing-dsvm-scenario-ipv6{job-suffix}'
+    node: '{node}'
+
+    wrappers:
+      - build-timeout:
+          timeout: 130
+      - timestamps
+
+    builders:
+      - print-template-name:
+          template-name: "{template-name}"
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_REGEX="^neutron_dynamic_routing.tests.tempest.scenario.ipv6\."
+          export DEVSTACK_GATE_TEMPEST_ALL_PLUGINS=1
+          export DEVSTACK_GATE_NEUTRON=1
+          if [ "$BRANCH_OVERRIDE" != "default" ] ; then
+              export OVERRIDE_ZUUL_BRANCH=$BRANCH_OVERRIDE
+          fi
+          export PROJECTS="openstack/neutron-dynamic-routing $PROJECTS"
+          DEVSTACK_LOCAL_CONFIG="NEUTRON_CREATE_INITIAL_NETWORKS=False"
+          DEVSTACK_LOCAL_CONFIG+=$'\n'"enable_plugin neutron-dynamic-routing git://git.openstack.org/openstack/neutron-dynamic-routing"
+          export DEVSTACK_LOCAL_CONFIG
+
+          function gate_hook {{
+              bash -xe $BASE/new/neutron-dynamic-routing/neutron_dynamic_routing/tests/contrib/gate_hook.sh dsvm-scenario
+          }}
+          export -f gate_hook
+
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 

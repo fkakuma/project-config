@@ -12253,6 +12253,8 @@ projects:
     check:
       - gate-neutron-dynamic-routing-dsvm-functional
       - gate-neutron-dynamic-routing-dsvm-tempest-api
+      - gate-neutron-dynamic-routing-dsvm-tempest-scenario-ipv4-nv
+      - gate-neutron-dynamic-routing-dsvm-tempest-scenario-ipv6-nv
     gate:
       - gate-neutron-dynamic-routing-dsvm-functional
       - gate-neutron-dynamic-routing-dsvm-tempest-api
