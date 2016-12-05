@@ -8073,10 +8073,20 @@
           node: ubuntu-trusty
           job-suffix: ''
           branch-override: default
-      - '{pipeline}-neutron-dynamic-routing-dsvm-tempest{job-suffix}':
+      - '{pipeline}-neutron-dynamic-routing-dsvm-tempest-api{job-suffix}':
           pipeline: gate
           node: ubuntu-trusty
           job-suffix: ''
+          branch-override: default
+      - '{pipeline}-neutron-dynamic-routing-dsvm-tempest-scenario-ipv4{job-suffix}':
+          pipeline: gate
+          node: ubuntu-trusty
+          job-suffix: '-nv'
+          branch-override: default
+      - '{pipeline}-neutron-dynamic-routing-dsvm-tempest-scenario-ipv6{job-suffix}':
+          pipeline: gate
+          node: ubuntu-trusty
+          job-suffix: '-nv'
           branch-override: default
       - periodic-python-jobs-with-neutron-lib-master
 
