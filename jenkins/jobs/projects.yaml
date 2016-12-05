@@ -8073,7 +8073,7 @@
           node: ubuntu-trusty
           job-suffix: ''
           branch-override: default
-      - '{pipeline}-neutron-dynamic-routing-dsvm-tempest{job-suffix}':
+      - '{pipeline}-neutron-dynamic-routing-dsvm-tempest-api{job-suffix}':
           pipeline: gate
           node: ubuntu-trusty
           job-suffix: ''

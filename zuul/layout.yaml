@@ -12252,10 +12252,10 @@ projects:
       - name: periodic-jobs-with-neutron-lib-master
     check:
       - gate-neutron-dynamic-routing-dsvm-functional
-      - gate-neutron-dynamic-routing-dsvm-tempest
+      - gate-neutron-dynamic-routing-dsvm-tempest-api
     gate:
       - gate-neutron-dynamic-routing-dsvm-functional
-      - gate-neutron-dynamic-routing-dsvm-tempest
+      - gate-neutron-dynamic-routing-dsvm-tempest-api
     post:
       - neutron-dynamic-routing-coverage-ubuntu-trusty
       - neutron-dynamic-routing-coverage-ubuntu-xenial

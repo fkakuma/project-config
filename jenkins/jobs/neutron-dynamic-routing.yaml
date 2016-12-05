@@ -46,7 +46,7 @@
       - console-log
 
 - job-template:
-    name: '{pipeline}-neutron-dynamic-routing-dsvm-tempest{job-suffix}'
+    name: '{pipeline}-neutron-dynamic-routing-dsvm-tempest-api{job-suffix}'
     node: '{node}'
 
     wrappers:
@@ -62,7 +62,7 @@
           #!/bin/bash -xe
           export PYTHONUNBUFFERED=true
           export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_REGEX="^neutron_dynamic_routing\."
+          export DEVSTACK_GATE_TEMPEST_REGEX="^neutron_dynamic_routing.tests.tempest.api\."
           export DEVSTACK_GATE_TEMPEST_ALL_PLUGINS=1
           export DEVSTACK_GATE_NEUTRON=1
           export BRANCH_OVERRIDE={branch-override}
